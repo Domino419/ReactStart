@@ -113,3 +113,10 @@ return (
 }
 
 export default App;
+
+
+2025.02.05 01:12 
+code fommat은 F1 누르고 format 입력 후 엔터 !
+.prettierr에서 사용하고 싶은 코드 스타일 지정
+
+
