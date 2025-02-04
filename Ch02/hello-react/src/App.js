@@ -1,50 +1,19 @@
-// 2.4.5 undefined 를 렌더링 하기
-
-import './App.css' ;
+import React from 'react';
+import './App.css';
 
 function App() {
-  const name = undefined ;
-  //const name = null ;
-  return name ;
+    const name = '리액트 075page';
+    return (
+        <>
+            {/* 주석은 이렇게 작성합니다 ! */}
+            <div
+                className="react" // 시작 태그를 여러 줄로 작성하게 된다면 여기에 주석을 작성 할 수 있음.
+            >
+                {name}
+            </div>
+            <input />
+        </>
+    );
 }
 
 export default App;
-
-
-
-
-
-
-// // 2.4.3 if 문 대신 조건부 연산자
-// function App() {
-//   const name ='리액트' ;
-//   return (
-//   <div>
-//       {name === '리액트' ? (
-//           <h1>리액트 입니다. </h1> ) :
-//           (
-//               <h1> 리액트가 아닙니다. </h1>
-//           )
-//       }
-//   </div>
-//   );
-// }
-//
-// export default App;
-//
-
-// 2.4.4 AND 연산자(&&)를 사용한 조건부 렌더링
-// null 을 렌더링하면 아무것도 보이지 않음.
-// function App() {
-//   const name ='뤼왝트' ;
-//   return (
-//       <div>
-//         {name === '리액트' ? (
-//                 <h1>리액트 입니다. </h1> ) :
-//             null
-//         }
-//       </div>
-//   );
-// }
-//
-// export default App;
