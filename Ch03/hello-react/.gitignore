@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#학습용 메모 파일 제외
+ReactMemo.md
