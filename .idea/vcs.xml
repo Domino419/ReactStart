@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$USER_HOME$/WebstormProjects/hellfiremaster.github.io" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../learning-react" vcs="Git" />
   </component>
 </project>

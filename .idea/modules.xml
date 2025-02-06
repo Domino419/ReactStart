@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/VSC_React.iml" filepath="$PROJECT_DIR$/.idea/VSC_React.iml" />
+      <module fileurl="file://$USER_HOME$/WebstormProjects/hellfiremaster.github.io/.idea/hellfiremaster.github.io.iml" filepath="$USER_HOME$/WebstormProjects/hellfiremaster.github.io/.idea/hellfiremaster.github.io.iml" />
       <module fileurl="file://$PROJECT_DIR$/../learning-react/.idea/learning-react.iml" filepath="$PROJECT_DIR$/../learning-react/.idea/learning-react.iml" />
     </modules>
   </component>

@@ -5,17 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="616775e2-4f31-4fb6-a513-89924984f074" name="Changes" comment="">
+      <change beforePath="$USER_HOME$/WebstormProjects/hellfiremaster.github.io/newpro/index.html" beforeDir="false" afterPath="$USER_HOME$/WebstormProjects/hellfiremaster.github.io/newpro/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/VSC_React.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/VSC_React.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ch03/hello-ch03/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/Ch03/hello-ch03/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ch03/hello-ch03/src/MyComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/Ch03/hello-ch03/src/MyComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ch03/hello-ch03/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Ch03/hello-ch03/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$USER_HOME$/WebstormProjects/hellfiremaster.github.io" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -31,12 +42,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "JavaScript Debug.index.html.executor": "Run",
     "Node.js.App.js.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/VSC_React/Ch03/hello-react/src",
+    "last_opened_file_path": "C:/Users/bluem/WebstormProjects/hellfiremaster.github.io",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -52,12 +65,16 @@
       <recent name="C:\VSC_React\Ch03\hello-react\src" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug.index.html">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/VSC_React/newpro/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="App.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/Ch02/hello-react/src/App.js" working-dir="$PROJECT_DIR$/Ch02/hello-react/src">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="Node.js.App.js" />
       </list>
     </recent_temporary>
@@ -79,10 +96,19 @@
       <updated>1737984788552</updated>
       <workItem from="1737984789937" duration="8481000" />
       <workItem from="1738767124308" duration="1927000" />
+      <workItem from="1738769745437" duration="46000" />
+      <workItem from="1738769811822" duration="5199000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint enabled="true" type="javascript-exception" />
+      </default-breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
