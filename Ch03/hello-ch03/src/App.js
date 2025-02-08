@@ -1,5 +1,6 @@
 //import MyComponent from "./MyComponent";
-import Counter from "./Counter";
+//import Counter from "./Counter";
+import Counter from "./Say";
 
 
 const App =() => {

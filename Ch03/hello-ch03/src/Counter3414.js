@@ -1,8 +1,8 @@
-// 현재 파일 버전은 3414 ver (111page)
+// 3.4.1.4 this.setState가 끝난 후 특정 작업 실행하기
 
-import  { Component } from 'react';
+import { Component } from 'react';
 
-class Counter extends Component {
+class Counter3414 extends Component {
   state = {
     number: 0,
     fixedNumber: 0,
@@ -48,4 +48,4 @@ class Counter extends Component {
   }
 }
 
-export default Counter;
+export default Counter3414;
