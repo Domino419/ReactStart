@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 /**
  * component     : Say
- * date          : 2025-02-06
+ * date          : 2025-02-09
  * description   : 버튼 클릭 시 메시지를 변경하는 React 함수형 컴포넌트 (114p)
  */
 const Say = () => {

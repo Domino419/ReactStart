@@ -170,3 +170,22 @@ rpc	PureComponent 기반 클래스형 컴포넌트
 클래스형 컴포넌트가 가지고 있는 state랑 함수 컴포넌트에서 useState 함수를 통해 사용하는 state 
 
 
+state를 사용할 때 주의 사항 
+클래스형 컴포넌트든 함수 컴포넌트든 state를 사용할 떄는
+setState 혹은 useState를 통해 전달 받은 세터 함수를 사용해야 함.
+
+| 잘못된 방법 | 올바른 방법 |
+|------------|------------|
+| `this.state.number += 1;` | `this.setState({ number: this.state.number + 1 });` |
+| `count += 1;` | `setCount(count + 1);` |
+
+ React의 state는 불변성을 유지해야 하며, setState 또는 useState의 세터 함수를 사용해야 리렌더링이 정상적으로 동작함
+
+
+ 
+ chap03 컴포넌트 정리 
+ - 컴포넌트 만들어서 내보내는 방법 
+ - props 및 state를 사용하는 방법 
+ - props는 부모 컴포넌트가 설정하고 , state는 컴포넌트 자체적으로 지닌 값으로 컴포넌트 내부에서 값을 업데이트 할 수 있음.
+ - props를 사용한다고 해서 값이 무조건 고정적이지는 않음, 부모 컴포넌트의 state를 자식 컴포넌트의 props로 전달하고, 자식 컴포넌트에서 특정 이벤트가 발생할 때 부모 컴포넌트의 메서드를 호출하면 props도 유동적으로 사용할 수 있음.
+
