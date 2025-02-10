@@ -3,6 +3,14 @@
 import  { Component } from 'react';
 
 class ScrollBox extends Component {
+
+    // 5.3.3. 컴포넌트에 메서드 생성 
+    ScrollToBottom = () => {
+        const { scrollHeight , clientHeight } = this.box ; 
+        this.box.scrollTop = scrollHeight - clientHeight ; 
+        console.log("::::::::::::::::::::::::: ScrollBox의 ScrollToBottom 동작 ! ");
+    }
+
     render() {
         const style = {
             border : '1px solid black' , 

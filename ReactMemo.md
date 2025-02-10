@@ -189,6 +189,18 @@ setState 혹은 useState를 통해 전달 받은 세터 함수를 사용해야 �
  - props는 부모 컴포넌트가 설정하고 , state는 컴포넌트 자체적으로 지닌 값으로 컴포넌트 내부에서 값을 업데이트 할 수 있음.
  - props를 사용한다고 해서 값이 무조건 고정적이지는 않음, 부모 컴포넌트의 state를 자식 컴포넌트의 props로 전달하고, 자식 컴포넌트에서 특정 이벤트가 발생할 때 부모 컴포넌트의 메서드를 호출하면 props도 유동적으로 사용할 수 있음.
 
+
+check 헷갈리지 말자!
+setState는 React 클래스 컴포넌트에서 상태(state)를 업데이트하는 메서드입니다. 
+setState를 호출하면 React가 상태를 병합하고, 컴포넌트가 다시 렌더링됩니다. 이는 비동기적으로 동작하며, 상태가 변경될 때마다 UI가 업데이트되도록 합니다.
+state는 클래스 컴포넌트에서 컴포넌트의 상태를 저장하는 객체입니다. 
+이 상태는 컴포넌트의 데이터와 UI를 동적으로 관리하고 업데이트하는 데 사용됩니다. state는 컴포넌트 내에서 직접 접근하여 읽을 수 있습니다.
+setState는 비동기, state는 동기.
+
+
+
+
+
 chap04 이벤트 핸들링
 -hello-ch03 을 Ch04로 복붙 - yarn install 진행함.
  
@@ -246,12 +258,15 @@ chap04 이벤트 핸들링
  5.2.1 콜백함수를 통한 ref 설정 
  5.2.2 createRef를 통한 ref 설정 
 5.3 컴포넌트에 ref 달기 
+ 5.3.1 사용법 - <Mycomponent ref ={ (ref) => {this.myComponent=ref} } />
+ onClick = {this.ScrollBox.ScrollToBottom()} 같은 형식으로 작성 하여도 틀린 것은 아니지만,  
+ 컴포넌트가 처음 렌더링될 때는 this.scrollbox값이 undefined 이므로 this.ScrollBox.ScrollToBottom 값을 읽어오는 과정에서 오류가 발생함. 
+ 화살표 함수 문법을 사용하여 아예 새로운 함수를 만들고 그 내부에서 this.ScrollBox.ScrollToBottom 메서드를 실행하면  
+ 버튼을 누를 때 (이미 한번 렌더링을 해서 this.scrollbox)를 설정한 시점) 의 this.ScrollBox.ScrollToBottom 를 읽어와서 실행하므로
+ 오류가 발생하지 않음.
 5.4 정리 
+ 컴포넌트 내부에서 DOM에 직접 접근할 때는 ref를 사용한다. 먼저 ref를 사용하지 않고도 원하는 기능을 사용할 수 있는지를 먼저 고민해야함.
+ 서로 다른 컴포넌트끼리 데이터를 교류할 때 ref를 사용한다면 ref의 ref의 ref가 이어지게 되어 추후에 유지보수가 어려워짐. 리액트 사상에 어긋나므로 
+ 데이터 교류는 언제나 부모 ↔ 자식 흐름으로 교류해야 한다. 
 
-check 헷갈리지 말자!
-setState는 React 클래스 컴포넌트에서 상태(state)를 업데이트하는 메서드입니다. 
-setState를 호출하면 React가 상태를 병합하고, 컴포넌트가 다시 렌더링됩니다. 이는 비동기적으로 동작하며, 상태가 변경될 때마다 UI가 업데이트되도록 합니다.
-state는 클래스 컴포넌트에서 컴포넌트의 상태를 저장하는 객체입니다. 
-이 상태는 컴포넌트의 데이터와 UI를 동적으로 관리하고 업데이트하는 데 사용됩니다. state는 컴포넌트 내에서 직접 접근하여 읽을 수 있습니다.
-setState는 비동기, state는 동기.
 
