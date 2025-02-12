@@ -17,7 +17,7 @@ const IterationSample = () => {
     setInputText(e.target.value);
 }
 
-  // onClick 화살표함수 추가 
+  // 데이터 추가 기능 구현 
   const onClick = () => {
     const nextNames = names.concat({
         id: nextId, 
@@ -29,7 +29,19 @@ const IterationSample = () => {
     console.log('::::::::::::::::::::::::: IterationSample.js -- onClick after ! ' + JSON.stringify(nextNames));
   }
 
-  const nameList = names.map((name) => <li key={name.id}>{name.text} </li>);
+  //컴포넌트 항목 제거 기능 추가 
+  const onRemove = id => {
+    const nextNames = names.filter(name => name.id !== id ) ;
+    setNames ( nextNames) ; 
+  }
+
+  
+  const nameList = names.map(name => (
+    <li key={name.id} onDoubleClick={() => onRemove(name.id)}>
+        {name.text}
+    </li>
+  )) ; 
+
 
   return (
     <>
