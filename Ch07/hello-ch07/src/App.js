@@ -1,13 +1,34 @@
 import  { Component } from 'react';
-import IterationSample from "./IterationSample";
+import LifeCycleSample from "./LifeCycleSample";
+
+
+// 랜덤 색상 생성 
+function getRandomColor() {
+  return '#'+Math.floor(Math.random()*16777215).toString(16) ; 
+} 
 
 
 class App extends Component {
+
+  state = {
+    color : '#000000' 
+  }
+
+  handleClick = () => {
+    this.setState({
+      color : getRandomColor() 
+    }) ; 
+    console.log("::::::::::::::::::::::::: color : " ,this.state.color);
+  }
+
     render() {
-        console.log("::::::::::::::::::::::::: Ch07 - 실행 환경 : " ,  process.env.NODE_ENV);
-    
+        console.log("::::::::::::::::::::::::: chap.07 컴포넌트의 라이프 사이클 메서드  , 실행환경 :" ,  process.env.NODE_ENV);
+
         return (
-          <IterationSample/>
+          <div> 
+            <button onClick={this.handleClick}> 랜덤색상 </button>
+            <LifeCycleSample color= {this.state.color} />
+          </div>
         );
     }
 }
