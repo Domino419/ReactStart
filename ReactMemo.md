@@ -314,11 +314,15 @@ chap04 이벤트 핸들링
      이 메서드에서 반환하는 값은 componentDidUpdate에서 세번째 파라미터인 snapshot 값으로 전달받을 수 있으며 주로 업데이트 하기 직전의 값을 
      참고할 일이 있을 때 사용한다 ( 예 : 스크롤바 유지 )
   7.2.7 componentDidUpdate 메서드 :
-  
-  7.2.8 componentWillUnmount 메서드 
-  7.2.9 componentDidCatch 메서드 
+     리랜더링을 완료한 후 실행한다. 업데이트가 끝난 직후이므로 DOM 관련 처리를 해도 무방하다. 
+     prevProps 또는 prevState를 사용하여 컴포넌트가 이전에 가졌던 데이터에 접근할 수 있다. 
+  7.2.8 componentWillUnmount 메서드 :
+     컴포넌트를 DOM에서 제거할 때 실행한다. componentDidMount에서 등록한 이벤트, 타이머, 직접 생성한 DOM이 있다면 여기서 제거 작업을 한다. 
+  7.2.9 componentDidCatch 메서드 :
+     리액트 v16에서 도입됨, 컴포넌트 랜더링 도중에 에러가 발생했을 때 애플리케이션이 먹통이 되지 않고 오류 UI를 볼 수 있게 해준다. 
+    
 
-
+ >> 개발모드에서 로그가 두줄로 나오는 거 불편해서 index.js 파일의 </React.StrictMode> 부분 주석 처리 
 
 
    

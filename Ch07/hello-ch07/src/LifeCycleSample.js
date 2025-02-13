@@ -58,7 +58,7 @@ class LifeCycleSample extends Component {
     }
 
     render() {
-        console.log(':::::::::::::::::::::::::render');
+        console.log('::::::::::::::::::::::::: render');
 
         const style = {
             color : this.props.color 
@@ -66,10 +66,11 @@ class LifeCycleSample extends Component {
 
         return (
             <div>
-                <h1 style={style} ref={ref => this.meRef=ref}>
-                    {this.state.number}
+                {/* {this.props.missing.value}    {/* 에러 페이지 실습을 위한 추가  */}  
+                <h1 style={style} ref ={ref=>(this.meRef = ref )}>
+                    {this.state.number} 
                 </h1>
-                <p> color: {this.state.color} </p>
+                <p> color : {this.state.color} </p>
                 <button onClick={this.handleClick} >더하기 </button>
             </div>
         )
@@ -77,3 +78,5 @@ class LifeCycleSample extends Component {
 }
 
 export default LifeCycleSample;
+
+
