@@ -275,3 +275,54 @@ chap04 이벤트 핸들링
  6.3 key 
  6.4 응용 
  6.5 정리 
+
+7장 컴포넌트의 라이프사이클 메서드 
+ 7.1 라이프사이클 메서드의 이해 
+  7.1.1) 마운트 단계  : 컴포넌트가 처음으로 DOM에 삽입되는 단계
+    - constructor : 컴포넌트를 초기화하기 위해 호출됨.. 초기 상태(state)와 인스턴스 메서드를 설정할 수 있음.
+    - componentWillMount : 컴포넌트가 마운트되기 직전에 호출. 현재는 주로 constructor에서 초기 설정을 처리함.
+    - render : 필수 메서드로, 컴포넌트의 UI를 정의하는 JSX를 반환.
+    - componentDidMount : 컴포넌트가 마운트된 직후에 호출. 네트워크 요청, DOM 조작 등을 처리할 수 있음.
+  7.1.2) 업데이트 단계 : 컴포넌트가 리렌더링될 때 호출. 주로 새로운 props를 받거나 상태(state)가 변경될 때 발생
+    - componentWillReceiveProps : 컴포넌트가 새로운 props를 받기 직전에 호출됩니다. 이 메서드에서 새로운 props에 따른 상태 업데이트를 처리
+    - shouldComponentUpdate : 리렌더링 여부를 결정하는 메서드입니다. 성능 최적화를 위해 사용됩니다. true 또는 false를 반환합니다
+    - componentWillUpdate : 컴포넌트가 업데이트되기 직전에 호출됩니다. 여기서 DOM을 조작하지 말아야 함.
+    - render : 컴포넌트의 UI를 업데이트하기 위해 호출됩니다.
+    - componentDidUpdate : 컴포넌트가 업데이트된 직후에 호출됩니다. 이곳에서 DOM 조작 등을 처리할 수 있습니다.
+  7.1.3) 언마운트 단계 : 컴포넌트가 DOM에서 제거되는 단계
+    - componentWillUnmount : 컴포넌트가 DOM에서 제거되기 직전에 호출됩니다. 여기서 타이머 제거, 네트워크 요청 취소 등 정리 작업을 수행합니다.
+
+ 7.2 라이프사이클 메서드 살펴보기
+  7.2.1 render() 함수 : 
+     컴포넌트에서 가장 중요한 메서드이며 필수 메서드 . this.props와 this.state에 접근 가능하며 리액트 요소를 반환한다. 
+     요소는 div 같은 태그가 될 수도 있고, 따로 선언한 컴포넌트가 될 수 있으며, 아무것도 보여주고 싶지 않다면 null 이나 false값을 반환하도록 한다. 
+     단, 이 메서드 안에서는 이벤트 설정이 아닌 곳에서 setState를 하거나, DOM에 접근해서는 안된다. (필요시 componentDidMount 에서 DOM정보를 가져오거나, state에 변화를 주도록 해야함.)
+  7.2.2 constructor 메서드 : 
+      컴포넌트의 생성자 메서드로 컴포넌트를 만들때 처음으로 실행, 초기 state를 정할 수 있다.
+  7.2.3 getDerivedStateFromProps 메서드  :
+     리액트 v16.3 이후에 새로 만든 라이프 사이클 메서드로 
+     props로 받아온 값을 state에 동기화 시키는 용도로 사용하며, 컴포넌트가 마운드 될 때와 업데이트 될 때 호출됨.
+  7.2.4 componentDidMount 메서드 :
+     컴포넌트를 만들고, 첫 렌더링을 마친 후 실행한다. 이 안에서 다른 자바스크립트 라이브버리 또는 프레임워크의 함수를 호출하거나
+     이벤트 등록, setTimeout , setInterval 네트워크 요청 같은 비동기 작업을 처리한다.
+  7.2.5 shouldComponentUpdate 메서드 :
+      props 또는 state를 변경했을 때 리렌더링을 시작할지 여부를 결정하는 메서드 
+      이 메서드에서는 반드시 true 또는 false 값을 반환하여야 한다. 컴포넌트를 만들때 이 메서드를 따로 생성하지 않으면 기본적으로 true를 반환한다. 
+      이 메서드 안에서 현재 props와 state는 this,props와 this.state로 접근하고 새로 설정된 props와 state는 nextProps와 nextState로 접근할 수 있다. 
+  7.2.6 getSnapshotBeforeUpdate 메서드 :
+     리액트 16.3 이후 만든 메서드로 render에서 만들어진 결과물이 브라우저에 실제로 반영되기 직전에 호출됨.
+     이 메서드에서 반환하는 값은 componentDidUpdate에서 세번째 파라미터인 snapshot 값으로 전달받을 수 있으며 주로 업데이트 하기 직전의 값을 
+     참고할 일이 있을 때 사용한다 ( 예 : 스크롤바 유지 )
+  7.2.7 componentDidUpdate 메서드 :
+  
+  7.2.8 componentWillUnmount 메서드 
+  7.2.9 componentDidCatch 메서드 
+
+
+
+
+   
+
+
+ 7.3 라이프사이클 메서드 사용하기
+ 7.4 정리 
