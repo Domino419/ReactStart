@@ -324,9 +324,30 @@ chap04 이벤트 핸들링
 
  >> 개발모드에서 로그가 두줄로 나오는 거 불편해서 index.js 파일의 </React.StrictMode> 부분 주석 처리 
 
-
-   
-
-
  7.3 라이프사이클 메서드 사용하기
  7.4 정리 
+
+
+
+8장 Hooks 
+ 8.1 useState 
+  8.1.1 useState를 여러번 사용하기 
+   - 자꾸 이벤트 핸들러 속성을 카멜케이스로 작성하지 않아서 에러내는 중.. 
+     Invalid event handler property `onchange`. Did you mean `onChange`? Error Component Stack 
+     하나의 useState 함수는 하나의 상태값만 관리할 수 있음. 컴포넌트에서 관리해야 할 상태가 여러개라면 useState를 여러 번 사용하면 됨. 
+ 8.2 useEffect 
+  useEffect는 리액트 컴포넌트가 랜더링 될 때마다 특정 작업을 수행하도록 설정할 수 있는 Hook으로 
+  클래스형 컴포넌트의 componentDidMount와 componentDidUpdate를 합친 형태로 볼 수 있음. 
+  8.2.1 마운트 될 때만 실행하고 싶을 떄 
+  8.2.2 특정 값이 업데이트 될 때만 실행하고 싶을 떄 
+  8.2.3 뒷정리 하기 
+ 8.3 useReducer 
+  8.3.1 카운터 구현하기 
+  8.3.2 인풋 상태 관리하기 
+ 8.4 useMemo
+ 8.5 useCallback 
+ 8.6 useRef 
+  8.6.1 로컬 변수 사용하기 
+ 8.7 커스텀 Hooks 만들기 
+ 8.8 다른 Hooks 
+ 8.9 정리 

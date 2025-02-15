@@ -3,7 +3,7 @@ import { useState } from 'react';
 const Counter = () => {
 
     const [value, setValue] = useState(0) ; 
-    console.log('::::::::::::::::::::::::: Counter.js : ')
+    console.log('::::::::::::::::::::::::: Counter.js : ',value)
 
     return (
        
