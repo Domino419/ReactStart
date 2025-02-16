@@ -1,7 +1,6 @@
 import  { React } from 'react'
 import './App.css'
-import CounterReducer from "./CounterReducer";
-import Average from "./Average";
+import InfoCustom from "./InfoCustom";
 
 
 
@@ -10,9 +9,7 @@ const App = () => {
  
   return (
     <div> 
-     <CounterReducer />
-     <div className="separator" />
-     <Average />
+     <InfoCustom />
      </div>
 
   )  

@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 const getAverage = (numbers) => {
-  console.log("::::::::::::::Average에서 getAverage 함수 호출  ! ");
+  console.log("::::::::::::::useMemo에서 getAverage 함수 호출  ! ");
   if (numbers.length === 0) return 0;
   const sum = numbers.reduce((a, b) => a + b);
   return sum / numbers.length;
 };
 
 
-const Average = () => {
+const AverageUseMemo = () => {
     // 숫자 리스트와 입력값을 관리하는 상태 변수 선언
     const [ list , setList] = useState([]) ;
     const [number, setNumber] = useState('') ;
@@ -18,6 +18,8 @@ const Average = () => {
       //  console.log("::::::::::::::onChange ! :: ",e.target.value);
         setNumber(e.target.value) ; 
     }; 
+
+    const avg = useMemo(()=> getAverage(list), [list]);
 
     // 리스트에 새로운 숫자를 추가하는 함수
     const onInsert = e => {
@@ -40,10 +42,11 @@ const Average = () => {
         </ul>
         <div>
              {/* 평균값 계산 및 표시 */}
-            <b> 평균값 :</b> {getAverage(list)}
+             <b> 8.4 useMemo </b>
+            <b> 평균값 :</b> {avg}
         </div>
     </div>
     );
 };
 
-export default Average;
+export default AverageUseMemo;
