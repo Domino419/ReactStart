@@ -1,26 +1,21 @@
-import React, { useState } from 'react'
+import  { React } from 'react'
 import './App.css'
-import Counter from "./Counter";
-import Info from "./Info";
+import CounterReducer from "./CounterReducer";
+import Average from "./Average";
+
 
 
 const App = () => {
   console.log("::::::::::::::::::::::::: Ch08.Hooks - 실행 환경 : ", process.env.NODE_ENV) 
-  const [visible, setVisible] = useState(false) ; 
+ 
   return (
-    <div>
-      <button
-      onClick={()=>{
-        setVisible(!visible) ;
-      }}
-      >
-        {visible? '숨기기 ' : '보이기'}   
-      </button>
+    <div> 
+     <CounterReducer />
+     <div className="separator" />
+     <Average />
+     </div>
 
-      <hr/>
-      {visible && <Info />}
-    </div>
-  ) ; 
+  )  
 };
 
 export default App;

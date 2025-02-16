@@ -9,13 +9,11 @@ const Info = () => {
 //  컴포넌트가 언마운드 되기 전이나 업데이트되기 직전에 어떠한 작업을 수행하고 싶다면 
 //  useEffect에서 뒷정리(cleanup) 함수를 retur 해야함.
   useEffect(() => {
-    console.log("::::::::::::::::::::::  8.2.3. useEffect ! ");
-    console.log(name) ; 
+    console.log("::::::::::::::::::::::  8.2.3. useEffect ! "); 
     return () => {
-        console.log("::::::::::::::::::::::  컴포넌트가 언마운트 되었습니다!!   return cleanup ");
+        console.log("::::::::::::::::::::::  컴포넌트가 언마운트 되었습니다!");
     }
-  }, []
-  ) ; 
+  }, []) ; 
 
   const onChangeName = (e) => {
     setName(e.target.value);
