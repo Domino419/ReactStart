@@ -1,4 +1,5 @@
-import styles from './CSSModule.module.css';
+// import styles from './CSSModule.module.scss';
+import styles from "./CSSModule.module.scss";
 
 const CssModule = () => {
         console.log(':::::::::::::::::::::CssModule :', {styles})
