@@ -7,24 +7,10 @@
     <list default="true" id="616775e2-4f31-4fb6-a513-89924984f074" name="Changes" comment="">
       <change afterPath="$USER_HOME$/WebstormProjects/hellfiremaster.github.io/newpro/default.css" afterDir="false" />
       <change afterPath="$USER_HOME$/WebstormProjects/hellfiremaster.github.io/newpro/indexSvn.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ch09/styling-react/config/env.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ch09/styling-react/config/getHttpsConfig.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ch09/styling-react/config/jest/babelTransform.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ch09/styling-react/config/jest/cssTransform.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ch09/styling-react/config/jest/fileTransform.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ch09/styling-react/config/modules.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ch09/styling-react/config/paths.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ch09/styling-react/config/webpack.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ch09/styling-react/config/webpack/persistentCache/createEnvironmentHash.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ch09/styling-react/config/webpackDevServer.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ch09/styling-react/scripts/build.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ch09/styling-react/scripts/start.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ch09/styling-react/scripts/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ch09/styling-react/src/CSSModule.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ch09/styling-react/src/CSSModule.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ch09/styling-react/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Ch09/styling-react/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ch09/styling-react/src/SassComponent.scss" beforeDir="false" afterPath="$PROJECT_DIR$/Ch09/styling-react/src/SassComponent.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ch09/styling-react/src/styles/utils.scss" beforeDir="false" afterPath="$PROJECT_DIR$/Ch09/styling-react/src/styles/utils.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ch09/styling-react/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Ch09/styling-react/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ch09/styling-react/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/Ch09/styling-react/src/App.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +103,7 @@
       <workItem from="1738769811822" duration="5199000" />
       <workItem from="1739460791551" duration="1625000" />
       <workItem from="1739462809108" duration="1225000" />
-      <workItem from="1739714804998" duration="3895000" />
+      <workItem from="1739714804998" duration="6086000" />
     </task>
     <servers />
   </component>
