@@ -42,11 +42,31 @@ const App = () => {
     [todos] ,
   ) ;
 
+  // 삭제 기능
+  const onRemove = useCallback(
+    id => {
+      setTodos(todos.filter(todo => todo.id !== id)) ;
+    },
+    [todos] ,
+  );
+
+  // 수정 기능 추가
+  const onToggle = useCallback(
+    id => {
+      setTodos(
+        todos.map(todo =>
+        todo.id === id ? {...todo, checked : !todo.checked } : todo,
+        ),
+      );
+    },
+    [todos] ,
+  )
+
   return (
     <div>
       <TodoTemplate>
        <TodoInsert onInsert={onInsert} />
-        <TodoList todos={todos}/>
+        <TodoList todos={todos} onRemove = {onRemove} onToggle = {onToggle} />
       </TodoTemplate>
     </div>
   )

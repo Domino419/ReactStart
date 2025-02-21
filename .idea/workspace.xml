@@ -9,8 +9,8 @@
       <change afterPath="$USER_HOME$/WebstormProjects/hellfiremaster.github.io/newpro/indexSvn.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Ch10/todo-app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/Ch10/todo-app/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ch10/todo-app/src/component/TodoInsert.js" beforeDir="false" afterPath="$PROJECT_DIR$/Ch10/todo-app/src/component/TodoInsert.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ch10/todo-app/src/component/TodoTemplate.js" beforeDir="false" afterPath="$PROJECT_DIR$/Ch10/todo-app/src/component/TodoTemplate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ch10/todo-app/src/component/TodoList.js" beforeDir="false" afterPath="$PROJECT_DIR$/Ch10/todo-app/src/component/TodoList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ch10/todo-app/src/component/TodoListItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/Ch10/todo-app/src/component/TodoListItem.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +109,8 @@
       <workItem from="1739460791551" duration="1625000" />
       <workItem from="1739462809108" duration="1225000" />
       <workItem from="1739714804998" duration="11513000" />
-      <workItem from="1739853511470" duration="6514000" />
+      <workItem from="1739853511470" duration="7344000" />
+      <workItem from="1740129329918" duration="852000" />
     </task>
     <servers />
   </component>
