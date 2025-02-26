@@ -1,4 +1,5 @@
 import { Link } from  'react-router-dom' ;
+import AboutQueryString from './AboutQueryString';
 
 const Home = () => {
   return (
@@ -7,7 +8,7 @@ const Home = () => {
       <p> 제일 먼저 보여지는 페이지 </p>
       <ul>
         <li>
-          <Link to="/about"> 소개 </Link> {/* Link 컴포넌트를 이용하여 다른 페이지로 이동하는 링크 보여주기 */}
+          <Link to="/aboutQueryString"> 소개 </Link> {/* Link 컴포넌트를 이용하여 다른 페이지로 이동하는 링크 보여주기 */}
         </li>
         <li>
           <Link to="/profiles/velopert"> velopert의 프로필 </Link>

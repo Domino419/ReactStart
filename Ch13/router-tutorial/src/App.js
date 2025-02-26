@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import About from './pages/About';
+//import About from './pages/About';
 import Home from './pages/Home';
-import Profile from './pages/Profile'; // 13.4.1 추가
+import Profile from './pages/Profile';
+import AboutQueryString from './pages/AboutQueryString'; // 13.4.1 추가
 
 const App = () => {
   return (
@@ -10,7 +11,7 @@ const App = () => {
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/aboutQueryString" element={<AboutQueryString />} />
           <Route path="/profiles/:username" element={<Profile />} />
         </Routes>
       </div>
