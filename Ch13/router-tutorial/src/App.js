@@ -14,7 +14,7 @@ const App = () => {
     <div>
     <Routes>
         <Route element={<Layout />} >
-        <Route path="/" element={<Home />} />
+        <Route index element={<Home />} />
         <Route path="/aboutQueryString" element={<AboutQueryString />} />
         <Route path="/profiles/:username" element={<Profile />} />
         </Route>
@@ -28,6 +28,3 @@ const App = () => {
 }
 
 export default App;
-/*
-Route 컴포넌트 사용방법 :  <Route path ="주소규칙" element ={보여줄 컴포넌트 jsx} />
- */
