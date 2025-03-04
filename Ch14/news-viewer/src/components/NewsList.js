@@ -27,7 +27,7 @@ useEffect( () => {
         try {
             const response = await axios.get(
                 // All articles about Tesla from the last month, sorted by recent first
-                 `https://newsapi.org/v2/everything?q=tesla&from=2025-02-03&sortBy=publishedAt&apiKey=937ec5a8aaa24aba94d4ef488637c221`,
+                 `https://newsapi.org/v2/everything?q=tesla&from=2025-02-04&sortBy=publishedAt&apiKey=937ec5a8aaa24aba94d4ef488637c221`,
             ) ; 
             setArticles(response.data.articles) ; 
         } catch (e) {
