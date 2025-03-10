@@ -1,35 +1,40 @@
-import styled from 'styled-components';
+
+// import styled from 'styled-components' ;
+// import { css } from '../../node_modules/styled-components/dist/base';
+
+import styled, { css } from 'styled-components'
+
 
 const categories = [
   {
     name: `tesla`,
     text: `테슬라`,
-    // https://newsapi.org/v2/everything?q=tesla&from=2025-02-04&sortBy=publishedAt&apiKey=937ec5a8aaa24aba94d4ef488637c221
+
   },
   {
     name: `apple`,
     text: `애플`,
-    // https://newsapi.org/v2/everything?q=apple&from=2025-02-04&sortBy=publishedAt&apiKey=937ec5a8aaa24aba94d4ef488637c221
+
   },
   {
     name: `samsung`,
     text: `삼성`,
-    //  https://newsapi.org/v2/everything?q=samsung&from=2025-02-04&sortBy=publishedAt&apiKey=937ec5a8aaa24aba94d4ef488637c221
+
   },
   {
     name: `xiaomi`,
     text: `샤오미`,
-    // https://newsapi.org/v2/everything?q=xiaomi&from=2025-02-04&sortBy=publishedAt&apiKey=937ec5a8aaa24aba94d4ef488637c221
+
   },
   {
     name: `hyundai`,
     text: `현대`,
-    //  https://newsapi.org/v2/everything?q=hyundai.&from=2025-02-04&sortBy=publishedAt&apiKey=937ec5a8aaa24aba94d4ef488637c221
+
   },
   {
     name: `LG`,
     text: `엘지`,
-    //  https://newsapi.org/v2/everything?q=LG&from=2025-02-04&sortBy=publishedAt&apiKey=937ec5a8aaa24aba94d4ef488637c221
+
   },
 ];
 
@@ -56,26 +61,31 @@ const Category = styled.div`
     color: #495057;
   }
 
-  &.active {
+  ${props =>
+    props.active && css`
     font-weight: 600;
     border-bottom: 2px solid #22b8cf;
     color: #22b8cf;
     &:hover {
       color: #3bc9db;
     }
-  }
+  `}
 
   & + & {
     margin-left: 1rem;
   }
 `;
 
-const Categories = () => {
+const Categories = ({onSelect, category }) => {
     return (
         <div>
             <CategoriesBlock>
                 {categories.map( c=> (
-                    <Category key = {c.name}>{c.text}</Category>
+                    <Category key = {c.name}
+                    active={category === c.name}
+                    onClick={()=> onSelect(c.name)}
+                    >{c.text}
+                    </Category>
                 ))}
             </CategoriesBlock>
         </div>
