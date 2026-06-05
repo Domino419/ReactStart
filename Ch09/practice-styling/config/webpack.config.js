@@ -515,8 +515,9 @@ module.exports = function (webpackEnv) {
                 loader : require.resolve("sass-loader"), 
                 options: {
                   sassOptions : {
-                    includePaths : [paths.appSrc + "/styles"], 
+                    includePaths : [paths.appSrc + "/styles"],
                   }, 
+                  additionalData : `@import "utils";`,
                 } , 
               }), 
               sideEffects : true , 
