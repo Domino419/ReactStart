@@ -2,7 +2,7 @@ import styles from './CSSModule.module.css' ;
 
  const CSSModule = () => {
     return ( 
-        <div className={'${styles.wrapper} ${styes.inversted}'}>
+        <div className={`${styles.wrapper} ${styles.inversted}`}>
             안녕하세요, 저는 <span className='somthing'> CSS Module ! </span>
         </div>
     );
