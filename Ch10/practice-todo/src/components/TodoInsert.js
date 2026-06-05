@@ -17,7 +17,6 @@ const TodoInsert = ({ onInsert }) => {
 
         // submit 이벤트는 브라우저에서 새로고침을 발생 시키기 때문에 
         // 방지하기 위해서 이 함수를 호출해야함
-
         e.preventDefault();
     }, 
     [onInsert, value] ,
