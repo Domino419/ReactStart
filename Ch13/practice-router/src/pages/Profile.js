@@ -19,7 +19,7 @@ const Profile = () => {
 
     return (
         <div>
-            <hi> 사용자 프로필</hi>
+            <h1> 사용자 프로필</h1>
             { profile ? ( 
                 <div>
                     <h2> {profile.name} </h2>
@@ -33,3 +33,8 @@ const Profile = () => {
 };
 
 export default Profile;
+
+/*
+URL 파라미터는 useParams 라는 HOOK을 사용하여 객체 형태로 조회할 수 있다.
+URL 파라미터의 이름은 라우터 설정을 할 때 Route 컴포넌트의 path props를 통해 설정한다.
+ */

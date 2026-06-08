@@ -8,7 +8,7 @@ function App248() {
   return (
     <Fragment>
       <div>
-      <hi>  2.4.8. CSS 클래스 사용</hi>
+      <h1>  2.4.8. CSS 클래스 사용</h1>
         <div className="react">{name}</div>
       </div>
 
