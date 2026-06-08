@@ -21,7 +21,7 @@ const App = () => {
 
   // 고유값으로 사용될 id
   // ref를 사용하여 변수 담기
-  const nextId = useRef(2504);
+  const nextId = useRef(2501);
 
   const onInsert = useCallback(
     (text) => {
@@ -51,7 +51,7 @@ const App = () => {
       ); 
     }, [todos], 
    )
-
+console.log(todos.length); // 콘솔에 2499가 찍히는지 확인
   return (
     <TodoTemplate>
       <TodoInsert onInsert={onInsert} />
