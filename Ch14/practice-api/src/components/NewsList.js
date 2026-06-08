@@ -1,8 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 import NewsItem from './NewsItem';
-import axios from 'axios';
-import usePromise from '../lib/usePromise';
+
 
 const NewsListBlock = styled.div`
   box-sizing: border-box;
@@ -21,7 +19,8 @@ const sampleArticle = {
     title : '제목', 
     description : '내용', 
     url : 'https//google.com',
-    urlToImage : 'https://via.placeholder.com/160'
+    // urlToImage : 'https://via.placeholder.com/160'
+    urlToImage : 'https://placehold.co/160'
 } ; 
 
 const NewsList = () => {
