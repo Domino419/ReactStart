@@ -7,16 +7,19 @@ const Home = () => {
       <p> 가장 먼저 보이는 페이지 ! </p>
       <ul>
         <li>
-            <Link to ="/about"> 소개 </Link>
+          <Link to="/about"> 소개 </Link>
         </li>
         <li>
-            <Link to ="/Profiles/velopert"> velopert 프로필 </Link>
+          <Link to="/Profiles/velopert"> velopert 프로필 </Link>
         </li>
-                <li>
-            <Link to ="/Profiles/gildong"> gildong  프로필 </Link>
+        <li>
+          <Link to="/Profiles/gildong"> gildong 프로필 </Link>
         </li>
-                <li>
-            <Link to ="/Profiles/void"> 존재하지 않는 프로필 </Link>
+        <li>
+          <Link to="/Profiles/void"> 존재하지 않는 프로필 </Link>
+        </li>
+        <li>
+          <Link to="/articles"> 게시글 목록  </Link>
         </li>
       </ul>
     </div>
