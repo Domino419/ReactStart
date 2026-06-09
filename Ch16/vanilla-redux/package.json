@@ -1,0 +1,12 @@
+{
+  "name": "vanilla-redux",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "redux": "^5.0.1"
+  }
+}
