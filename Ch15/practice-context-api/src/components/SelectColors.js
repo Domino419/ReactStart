@@ -13,7 +13,7 @@ class SelectColors extends Component {
 
   
   handleSetSubcolor = subcolor => {
-    this.context.actions.setSubcolor( subcolor ) ;
+    this.context.actions.setSubcolor( subcolor ) ;  
   } ; 
 
     render() {
