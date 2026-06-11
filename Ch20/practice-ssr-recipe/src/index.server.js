@@ -1,7 +1,27 @@
 import ReactDOMserver from 'react-dom/server' ;
+import express from 'express' ;
+//import { StaticRouter} from 'react-router-dom/server'
+import { StaticRouter } from 'react-router-dom'; 
+import App from './App'
 
-const html = ReactDOMserver.renderToString(
-    <div> Hello Server side Rendering ! </div>
-) ; 
+const app = express() ;
 
-console.log (`:::::::::::::::::`, html)  ;
+const serverRender = ( req, res, next) => {
+    // 404가 떠야 하는 상황에서 404를 띄우지 않고 렌더링을 해주도록 함. 
+
+    const context = {} ; 
+    const jsx = (
+        <StaticRouter location = {req.url} context={context}>
+        <App/ >    
+        </StaticRouter>
+    ) ; 
+    const root = ReactDOMserver.renderToString(jsx) ; 
+    res.send(root) ; 
+}; 
+
+app.use(serverRender) ;
+
+// 5000포트로 서버 가동
+app.listen(5000, () => {
+    console.log('Running on http://localhost:5000') ; 
+}) ; 
