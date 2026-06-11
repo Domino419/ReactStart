@@ -1,22 +1,33 @@
+import { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-//import notify from "./notify";
+//import SplitMe from "./SplitMe";
 
-function App() {
+class App extends Component {
+  state = {
+    SplitMe: null,
+  };
 
-  const onClick = () => {
-    import('./notify').then(result => result.default() ) ; 
-    // notify() ;
+  handleClick = async () => {
+    const loadedModule = await import("./SplitMe");
+    this.setState({
+      SplitMe: loadedModule.default,
+    });
+  };
+
+  render() {
+    const { SplitMe } = this.state;
+
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="app-logo" alt="logo"></img>
+          <p onClick={this.handleClick}> Hello React ! </p>
+          {SplitMe && <SplitMe /> }
+        </header>
+      </div>
+    );
   }
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="app-logo" alt="logo"></img>
-        <p onClick={onClick}> Hello React !  </p>
-      </header>
-    </div>
-  );
 }
 
 export default App;
