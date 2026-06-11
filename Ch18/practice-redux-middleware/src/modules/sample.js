@@ -1,5 +1,6 @@
 import { handleActions } from "redux-actions"; 
 import * as api from "../lib/api";    
+import createRequestThunk  from "../lib/createRequestThunk";
 
 
 // 1. 액션 타입 지정 
@@ -14,44 +15,8 @@ const GET_USERS_FAILURE = "sample/GET_USERS_FAILURE";
 
 
 //2.thunk 함수 만들기. 
-export const getPost = (id) => async (dispatch) => {
-  dispatch({ type: GET_POST }); // ① 리덕스에 "방금 글 요청 시작했어!"라고 먼저 알림 (화면에 로딩 뺑뺑이 돌리기용)
-  try {
-    const response = await api.getPost(id); // ② 서버 응답을 얌전히 기다림 (응답이 올 때까지 아래 코드는 실행 안 됨)
-    dispatch({
-      type: GET_POST_SUCCESS,
-      payload: response.data, // ③ 성공했으니 서버가 준 진짜 데이터(response.data)를 리덕스 주머니에 넣어줌
-    }); 
-  } catch (e) {
-    dispatch({
-      type: GET_POST_FAILURE, 
-      payload: e,             // 실패 원인(에러 내용)을 담아둠
-      error: true,            // 에러가 발생했다는 표시 기증
-    }); 
-    throw e; 
-  }
-};
-
-
-export const getUsers = () => async (dispatch) => {
-  dispatch({ type: GET_USERS }); // ① 리덕스에 "유저 목록 요청 시작했어!"라고 알림
-  try {
-    const response = await api.getUsers(); 
-    dispatch({
-      type: GET_USERS_SUCCESS,
-      payload: response.data, // ② 성공했으니 유저 데이터를 리덕스 주머니에 골인
-    }); 
-  } catch (e) {
-    dispatch({
-      type: GET_USERS_FAILURE, // 
-      payload: e,
-      error: true,
-    }); 
-    throw e; 
-  }
-};
-
-
+ export const getPost = createRequestThunk(GET_POST, api.getPost) ;
+ export const getUsers = createRequestThunk(GET_USERS, api.getUsers) ;
 
 //  4. 기본 주머니(초기 상태) 설정
 const initialState = {
