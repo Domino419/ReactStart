@@ -5,12 +5,19 @@ import App from "./App";
 import path from "path";
 import fs from "fs";
 
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import rootReducer from "./modules";
+
+import PreloadContext from "./lib/PreloadContext";
+
 // asset-manifest.json 에서 파일 경로 조회
 const manifest = JSON.parse(
   fs.readFileSync(path.resolve("./build/asset-manifest.json"), "utf-8"),
 );
 
-function createPage(root) {
+function createPage(root, stateScript ) {
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -29,6 +36,7 @@ function createPage(root) {
   <body>
     <noscript> You need to enable JavaScript to run this app ...</noscript>
     <div id="root">{root}</div>
+    ${stateScript}
     <script src="${manifest.files["main.js"]}"></script>
   </body>
 </html> `;
@@ -36,17 +44,41 @@ function createPage(root) {
 
 const app = express();
 
-const serverRender = (req, res, next) => {
+const serverRender = async (req, res, next) => {
   // 404가 떠야 하는 상황에서 404를 띄우지 않고 렌더링을 해주도록 함.
 
   const context = {};
+
+  const store = createStore(rootReducer, applyMiddleware(thunk));
+
+  const preloadContext = {
+    done: false,
+    promises: [],
+  };
+
   const jsx = (
-    <StaticRouter location={req.url} context={context}>
-      <App />
-    </StaticRouter>
+    <PreloadContext.Provider value={preloadContext}>
+      <Provider store={store}>
+        <StaticRouter location={req.url} context={context}>
+          <App />
+        </StaticRouter>
+      </Provider>
+    </PreloadContext.Provider>
   );
+
+  ReactDOMserver.renderToStaticMarkup(jsx); // 한번 더 랜더링
+  try {
+    await Promise.all(preloadContext.promises);
+  } catch (e) {
+    return res.status(500);
+  }
+  preloadContext.done = true;
+
   const root = ReactDOMserver.renderToString(jsx);
-  res.send(createPage(root));
+  const stateString = JSON.stringify(store.getState()).replace(/</g,`\\u003c`) ;
+  const stateScript = `<script>__PRELOADED_STATE__=${stateString}</script>`;
+
+  res.send(createPage(root, stateScript ));
 };
 
 const serve = express.static(path.resolve("./build"), {
