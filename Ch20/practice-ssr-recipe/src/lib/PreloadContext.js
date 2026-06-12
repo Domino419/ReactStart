@@ -15,7 +15,16 @@ export const Preloader = ( { resolve }) => {
 // promise 배열에 프로미스 등록 
 // resolve 함수가 프로미스를 반환하지 않더라도 프로미스 취급을 하기 위해서 
 // Promise.resolve 함수 사용 
-
 preloadContext.promises.push(Promise.resolve(resolve())) ;
 return null ; 
 } ; 
+
+// Hook 형태로 사용할 수 있는 함수 
+export const usePreloader = resolve => {
+    const preloadContext = useContext(PreloadContext) ; 
+    if ( !preloadContext) return null ; 
+    if ( preloadContext.done ) return null ; 
+    preloadContext.promises.push(Promise.resolve(resolve())) ;  
+} ;
+
+// 588page 
