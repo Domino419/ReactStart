@@ -11,30 +11,40 @@ import { thunk } from "redux-thunk";
 // import thunk from 'redux-thunk' ;
 import rootReducer, { rootSaga } from "./modules";
 import createSagaMiddleware from "redux-saga";
+import { loadableReady } from "@loadable/component";
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
-  rootReducer, 
-  window.__PRELOADED_STATE__, // 이 값을 초기 상태로 사용함. 
-  applyMiddleware(thunk, sagaMiddleware) 
+  rootReducer,
+  window.__PRELOADED_STATE__, // 이 값을 초기 상태로 사용함.
+  applyMiddleware(thunk, sagaMiddleware),
 );
 
-sagaMiddleware.run(rootSaga) ;
+sagaMiddleware.run(rootSaga);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>,
-);
+async function render() {
+  if (process.env.NODE_ENV === "production") {
+    await loadableReady();
+  }
+
+  root.render(
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>,
+  );
+}
+
+render() ; 
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 //reportWebVitals();
 
-// 581page 
+// 596page

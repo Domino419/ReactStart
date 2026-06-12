@@ -1,3 +1,5 @@
+const LoadablePlugin = require('@loadable/webpack-plugin');
+
 'use strict';
 
 const fs = require('fs');
@@ -747,6 +749,7 @@ module.exports = function (webpackEnv) {
             },
           },
         }),
+     new LoadablePlugin() , 
     ].filter(Boolean),
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter

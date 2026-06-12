@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import User from "../components/User";
-import { Preloader, usePreloader } from "../lib/PreloadContext";
+import {  usePreloader } from "../lib/PreloadContext";
 import { getUser } from "../modules/users";
 
 const UserContainer = ({ id }) => {
