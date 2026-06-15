@@ -1,9 +1,7 @@
-// 21.5.4 라우트 모듈화
-
-const Router = require('koa-router');
-const posts = require('./posts');
+import Router from 'koa-router';
+import posts from './posts/index.js';
 
 const api = new Router();
 api.use('/posts', posts.routes());
 
-module.exports = api;
+export default api;
