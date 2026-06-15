@@ -1,5 +1,6 @@
 import Post from '../../models/post.js';
 import mongoose from 'mongoose';
+import Joi from 'joi';
 
 const { ObjectId } = mongoose.Types;
 
@@ -18,6 +19,22 @@ export const checkObjectId = (ctx, next) => {
 
 export const write = async (ctx) => {
   console.log('write:::::::::::::::::::::');
+
+  const schema = Joi.object().keys({
+    title: Joi.string().required(),
+    body: Joi.string().required(),
+    tags: Joi.array().items(Joi.string()).required(),
+  });
+
+  const result = schema.validate(ctx.request.body);
+  if (result.error) {
+    console.log(' JOi 검증 실패 !');
+    ctx.status = 400;
+    //    ctx.body = result.error;
+    ctx.body = result.error.details[0].message;
+    return;
+  }
+
   const { title, body, tags } = ctx.request.body;
   console.log(ctx.request.body);
   const post = new Post({
