@@ -1,4 +1,20 @@
 import Post from '../../models/post.js';
+import mongoose from 'mongoose';
+
+const { ObjectId } = mongoose.Types;
+
+export const checkObjectId = (ctx, next) => {
+  const { id } = ctx.params;
+  console.log('checkObjectId:::::::::::::::::::::');
+
+  if (!ObjectId.isValid(id)) {
+    ctx.status = 400;
+    console.log('유효하지 않은 ObjectId 입니다. ');
+    return;
+  }
+  console.log('유효한 ObjectId 를 확인 했습니다. ');
+  return next();
+};
 
 export const write = async (ctx) => {
   console.log('write:::::::::::::::::::::');
