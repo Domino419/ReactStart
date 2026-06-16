@@ -64,9 +64,9 @@ export const list = async (ctx) => {
 };
 
 export const read = async (ctx) => {
-  console.log('read:::::::::::::::::::::');
+  //  console.log('read:::::::::::::::::::::');
   const { id } = ctx.params;
-  console.log(ctx.params);
+  console.log('read:::::::::::::::::::::', ctx.params);
   try {
     const post = await Post.findById(id).exec();
     if (!post) {
@@ -82,9 +82,9 @@ export const read = async (ctx) => {
 };
 
 export const remove = async (ctx) => {
-  console.log('remove:::::::::::::::::::::');
+  //console.log('remove:::::::::::::::::::::');
   const { id } = ctx.params;
-  console.log(ctx.params);
+  console.log('remove:::::::::::::::::::::', ctx.params);
   try {
     //    await Post.findByIdAndRemove(id).exec();
     await Post.findByIdAndDelete(id).exec();
@@ -97,9 +97,25 @@ export const remove = async (ctx) => {
 };
 
 export const update = async (ctx) => {
-  console.log('update:::::::::::::::::::::');
+  //console.log('update:::::::::::::::::::::');
   const { id } = ctx.params;
-  console.log(ctx.params);
+  console.log('update:::::::::::::::::::::', ctx.params);
+
+  const schema = Joi.object().keys({
+    title: Joi.string(),
+    body: Joi.string(),
+    tags: Joi.array().items(Joi.string()),
+  });
+
+  // 검증 실패시 에러 처리
+  const result = schema.validate(ctx.request.body);
+  if (result.error) {
+    console.log(' update 검증 실패 - ');
+    ctx.status = 400;
+    ctx.body = result.error;
+    return;
+  }
+
   try {
     const post = await Post.findByIdAndUpdate(id, ctx.request.body, {
       new: true, //  true : 업데이트된 값을 반환, false : 업데이트 되기 전 데이터 반환

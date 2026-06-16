@@ -38,5 +38,4 @@ app.use(router.routes()).use(router.allowedMethods());
 const port = PORT || 4000;
 app.listen(port, () => {
   console.log('Listening to port %d', port);
-  console.log(' 성공 !! ');
 });
