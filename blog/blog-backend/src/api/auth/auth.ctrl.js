@@ -45,6 +45,32 @@ export const register = async (ctx) => {
 // 로그인
 export const login = async (ctx) => {
   console.log('로그인--------------------');
+
+  const { username, password } = ctx.request.body;
+
+  if (!username || !password) {
+    ctx.status = 401; // Unauthorized
+    console.log('로그인 Unauthorized --------------------');
+    return;
+  }
+
+  try {
+    const user = await User.findByUsername(username);
+    if (!user) {
+      ctx.status = 401;
+      return;
+    }
+
+    const valid = await user.checkPassword(password);
+
+    if (!valid) {
+      ctx.status = 401;
+      return;
+    }
+    ctx.body = user.serialize();
+  } catch (e) {
+    ctx.throw(500, e);
+  }
 };
 
 // 로그인 상태
