@@ -53,9 +53,35 @@ export const write = async (ctx) => {
 
 export const list = async (ctx) => {
   console.log('list:::::::::::::::::::::');
+
+  const page = parseInt(ctx.query.page || '1', 10);
+
+  if (page < 1) {
+    console.log('list:::::::::::::::::::::페이징 처리 ');
+    ctx.status = 400;
+    return;
+  }
+
   try {
-    const posts = await Post.find().exec();
-    ctx.body = posts;
+    const posts = await Post.find()
+      .sort({ _id: -1 }) // 정렬 필드 설정
+      .limit(10) // list 갯수 설정
+      .skip((page - 1) * 10) //페이징처리
+      .exec();
+
+    //페이지 번호 설정
+    const postCount = await Post.countDocuments().exec();
+    ctx.set('Last-page', Math.ceil(postCount / 10));
+
+    // 내용 길이 제한 (10글자 까지만..!)
+    ctx.body = posts
+      .map((post) => post.toJSON())
+      .map((post) => ({
+        ...post,
+        body:
+          post.body.length < 10 ? post.body : `${post.body.slice(0, 10)}...`,
+      }));
+
     console.log(posts);
   } catch (e) {
     console.log('list _ error 발생 !! ');

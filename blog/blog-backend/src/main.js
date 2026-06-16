@@ -6,6 +6,10 @@ import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import mongoose from 'mongoose';
 
+// api 라우터 import
+import api from './api/index.js';
+import createFakeData from './createFakeData.js';
+
 // 비구조화 할당을 통해 process.env 내부 값에 대한 레퍼런스 만들기.
 const { PORT, MONGO_URI } = process.env;
 
@@ -13,13 +17,13 @@ mongoose
   .connect(MONGO_URI)
   .then(() => {
     console.log('Connect to MongoDB');
+    createFakeData();
+    console.log('createFakeData 호출');
   })
   .catch((e) => {
     console.log(e);
   });
 
-// api 라우터 import
-import api from './api/index.js';
 // ※ 폴더 import 시 반드시 index.js까지 명시해야 함 (ESM 규칙)
 
 const app = new Koa();
