@@ -9,16 +9,17 @@ import mongoose from 'mongoose';
 // api 라우터 import
 import api from './api/index.js';
 import createFakeData from './createFakeData.js';
+import jwtMiddleware from './lib/jwtMiddleware.js';
 
 // 비구조화 할당을 통해 process.env 내부 값에 대한 레퍼런스 만들기.
 const { PORT, MONGO_URI } = process.env;
+const mustAdd = 'N'; // dummy 생성 필요시 Y
 
 mongoose
   .connect(MONGO_URI)
   .then(() => {
     console.log('Connect to MongoDB');
-    createFakeData();
-    console.log('createFakeData 호출');
+    mustAdd === 'Y' && createFakeData();
   })
   .catch((e) => {
     console.log(e);
@@ -34,6 +35,7 @@ router.use('/api', api.routes());
 
 // 라우터 적용 전에 body-parser 적용
 app.use(bodyParser());
+app.use(jwtMiddleware);
 
 // app 인스턴스에 라우터 적용
 app.use(router.routes()).use(router.allowedMethods());
