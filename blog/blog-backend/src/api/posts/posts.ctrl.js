@@ -90,7 +90,6 @@ export const list = async (ctx) => {
 };
 
 export const read = async (ctx) => {
-  //  console.log('read:::::::::::::::::::::');
   const { id } = ctx.params;
   console.log('read:::::::::::::::::::::', ctx.params);
   try {
