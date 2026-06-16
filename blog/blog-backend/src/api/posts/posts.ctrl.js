@@ -4,19 +4,48 @@ import Joi from 'joi';
 
 const { ObjectId } = mongoose.Types;
 
+//  ObjectId 유효성 검사
+/*
 export const checkObjectId = (ctx, next) => {
   const { id } = ctx.params;
   console.log('checkObjectId:::::::::::::::::::::');
 
   if (!ObjectId.isValid(id)) {
     ctx.status = 400;
-    console.log('유효하지 않은 ObjectId 입니다. ');
+    console.log('유효하지 않은 ObjectId 입니다.');
     return;
   }
-  console.log('유효한 ObjectId 를 확인 했습니다. ');
+  console.log('유효한 ObjectId 를 확인 했습니다.');
   return next();
 };
+*/
 
+//  ObjectId 유효성 검사
+export const getPostById = async (ctx, next) => {
+  const { id } = ctx.params;
+  console.log('getPostById  동작 확인 ', { id });
+
+  if (!ObjectId.isValid(id)) {
+    ctx.status = 400;
+    console.log('getPostById  동작 확인 1');
+    return;
+  }
+  try {
+    const post = await Post.findById(id);
+    console.log('getPostById  동작 확인 2');
+    if (!post) {
+      ctx.status = 404;
+      return;
+    }
+    ctx.state.post = post;
+    console.log('getPostById  동작 확인 3');
+    return next();
+  } catch (error) {
+    ctx.throw(500, error);
+  }
+};
+
+//  게시글 작성
 export const write = async (ctx) => {
   console.log('write:::::::::::::::::::::');
 
@@ -30,50 +59,48 @@ export const write = async (ctx) => {
   if (result.error) {
     console.log(' JOi 검증 실패 !');
     ctx.status = 400;
-    //    ctx.body = result.error;
     ctx.body = result.error.details[0].message;
     return;
   }
 
   const { title, body, tags } = ctx.request.body;
-  console.log(ctx.request.body);
   const post = new Post({
     title,
     body,
     tags,
+    user: ctx.state.user,
   });
+
   try {
     await post.save();
     ctx.body = post;
   } catch (e) {
-    console.log('write _ error 발생 !! ');
+    console.log('write _ error 발생 !!');
     ctx.throw(500, e);
   }
 };
 
+// 게시글 목록 조회 (페이징 포함)
 export const list = async (ctx) => {
   console.log('list:::::::::::::::::::::');
 
   const page = parseInt(ctx.query.page || '1', 10);
 
   if (page < 1) {
-    console.log('list:::::::::::::::::::::페이징 처리 ');
     ctx.status = 400;
     return;
   }
 
   try {
     const posts = await Post.find()
-      .sort({ _id: -1 }) // 정렬 필드 설정
-      .limit(10) // list 갯수 설정
-      .skip((page - 1) * 10) //페이징처리
+      .sort({ _id: -1 })
+      .limit(10)
+      .skip((page - 1) * 10)
       .exec();
 
-    //페이지 번호 설정
     const postCount = await Post.countDocuments().exec();
     ctx.set('Last-page', Math.ceil(postCount / 10));
 
-    // 내용 길이 제한 (10글자 까지만..!)
     ctx.body = posts
       .map((post) => post.toJSON())
       .map((post) => ({
@@ -81,17 +108,22 @@ export const list = async (ctx) => {
         body:
           post.body.length < 10 ? post.body : `${post.body.slice(0, 10)}...`,
       }));
-
-    console.log(posts);
   } catch (e) {
-    console.log('list _ error 발생 !! ');
+    console.log('list _ error 발생 !!');
     ctx.throw(500, e);
   }
 };
 
+//  특정 게시글 조회
+export const read = (ctx) => {
+  ctx.body = ctx.state.post;
+};
+
+/*
 export const read = async (ctx) => {
   const { id } = ctx.params;
   console.log('read:::::::::::::::::::::', ctx.params);
+
   try {
     const post = await Post.findById(id).exec();
     if (!post) {
@@ -101,28 +133,29 @@ export const read = async (ctx) => {
     }
     ctx.body = post;
   } catch (e) {
-    console.log('read _ error 발생 !! ');
+    console.log('read _ error 발생 !!');
     ctx.throw(500, e);
   }
 };
+*/
 
+//  게시글 삭제
 export const remove = async (ctx) => {
-  //console.log('remove:::::::::::::::::::::');
   const { id } = ctx.params;
   console.log('remove:::::::::::::::::::::', ctx.params);
+
   try {
-    //    await Post.findByIdAndRemove(id).exec();
     await Post.findByIdAndDelete(id).exec();
     ctx.status = 204;
     console.log('remove 완료');
   } catch (e) {
-    console.log('remove_error 발생 !! ');
+    console.log('remove_error 발생 !!');
     ctx.throw(500, e);
   }
 };
 
+//  게시글 수정
 export const update = async (ctx) => {
-  //console.log('update:::::::::::::::::::::');
   const { id } = ctx.params;
   console.log('update:::::::::::::::::::::', ctx.params);
 
@@ -132,7 +165,6 @@ export const update = async (ctx) => {
     tags: Joi.array().items(Joi.string()),
   });
 
-  // 검증 실패시 에러 처리
   const result = schema.validate(ctx.request.body);
   if (result.error) {
     console.log(' update 검증 실패 - ');
@@ -143,21 +175,33 @@ export const update = async (ctx) => {
 
   try {
     const post = await Post.findByIdAndUpdate(id, ctx.request.body, {
-      new: true, //  true : 업데이트된 값을 반환, false : 업데이트 되기 전 데이터 반환
+      new: true,
     }).exec();
+
     if (!post) {
-      console.log('Post가 일치하지 않습니다. ');
       ctx.status = 404;
+      console.log('Post가 일치하지 않습니다.');
       return;
     }
+
     ctx.body = post;
     console.log('update 완료');
   } catch (e) {
     if (e.name === 'CastError') {
-      ctx.status = 400; // 잘못된 ObjectId
+      ctx.status = 400;
       return;
     }
-    console.log('update_error 발생 !! ');
+    console.log('update_error 발생 !!');
     ctx.throw(500, e);
   }
+};
+
+// checkOwnPost
+export const checkOwnPost = (ctx, next) => {
+  const { user, post } = ctx.state;
+  if (post.user._id.toString() !== user._id) {
+    ctx.status = 403;
+    return;
+  }
+  return next();
 };

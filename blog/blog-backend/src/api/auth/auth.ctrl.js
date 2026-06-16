@@ -7,6 +7,7 @@ export const register = async (ctx) => {
 
   // Request Body 검증
   const schema = Joi.object().keys({
+    // cspell:disable-next-line
     username: Joi.string().alphanum().min(3).max(20).required(),
     password: Joi.string().required(),
   });
