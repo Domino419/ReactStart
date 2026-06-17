@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import palette from '../../lib/palette';
 
 const StyledButton = styled.button`
@@ -15,8 +15,28 @@ const StyledButton = styled.button`
   &:hover {
     background: ${palette.gray[6]};
   }
-`;
 
-const Button = (props) => <StyledButton {...props} />;
+  ${(props) =>
+    props.$fullWidth &&
+    css`
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+      width: 100%;
+      font-size: 1.125rem;
+    `}
+
+  ${(props) =>
+    props.$cyan &&
+    css`
+      background: #22b8cf;
+      &:hover {
+        background: #3bc9db;
+      }
+    `}
+`;
+/* 교재랑 다름,  F12 개발자 콘솔에 에러 뜨길래 코드 바꿈. */
+const Button = ({ cyan, fullWidth, ...rest }) => {
+  return <StyledButton $cyan={cyan} $fullWidth={fullWidth} {...rest} />;
+};
 
 export default Button;

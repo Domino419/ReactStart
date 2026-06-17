@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import palette from '../../../lib/palette';
-import Button from '../Button.js';
-//import Button from '../common/Button';
+import palette from '../../lib/palette';
+import Button from '../common/Button.js';
 
 /* 회원 가입 or 로그인 폼 */
 const AuthFormBlock = styled.div`
@@ -43,6 +42,11 @@ const Footer = styled.div`
   }
 `;
 
+/* styled 함수 사용 */
+const ButtonWithMarginTop = styled(Button)`
+  margin-top: 1rem;
+`;
+
 const AuthForm = () => {
   return (
     <AuthFormBlock>
@@ -59,7 +63,9 @@ const AuthForm = () => {
           placeholder="비밀번호"
           type="password"
         />
-        <Button>로그인 </Button>
+        <ButtonWithMarginTop cyan fullWidth>
+          로그인
+        </ButtonWithMarginTop>
       </form>
       <Footer>
         <Link to="/register"> 회원가입 </Link>
