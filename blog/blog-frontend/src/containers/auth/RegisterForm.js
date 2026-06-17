@@ -3,6 +3,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { changeField, initializeForm, register } from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm';
 import { check } from '../../modules/user';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -59,13 +60,16 @@ const RegisterForm = () => {
     }
   }, [auth, authError, dispatch]);
 
+  const Navigate = useNavigate();
+
   // user 값 설정 체크
   useEffect(() => {
     if (user) {
-      console.log('check API 성공 ');
-      console.log(user);
+      // eslint ignore
+      console.log('check API 성공 ', user);
+      Navigate('/'); // 홈 화면으로 이동
     }
-  }, [user]);
+  }, [Navigate, user]);
 
   return (
     <AuthForm
