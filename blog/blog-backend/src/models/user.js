@@ -19,7 +19,18 @@ UserSchema.methods.setPassword = async function (password) {
 
 // 패스워드 확인 인스턴트 메서드
 UserSchema.methods.checkPassword = async function (password) {
+  console.log('======= [비밀번호 검증 시작] =======');
+  console.log('1. 프론트에서 넘어온 날것의 password :', password);
+  console.log(
+    '2. 현재 DB(Mongoose)에 저장되어 있는 hashedPassword :',
+    this.hashedPassword,
+  );
+
   const result = await bcrypt.compare(password, this.hashedPassword);
+
+  console.log('3. Bcrypt.compare 최종 대조 결과 :', result);
+  console.log('====================================');
+
   console.log('password 검증 결과 ', result);
   return result;
 };
