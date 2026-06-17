@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { changeField, initializeForm } from '../../modules/auth';
+import { changeField, initializeForm, register } from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm';
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
-
-  const { form } = useSelector(
+  const { form, auth, authError } = useSelector(
     ({ auth }) => ({
       form: auth.register,
+      auth: auth.auth,
+      authError: auth.authError,
     }),
     shallowEqual,
   );
@@ -28,13 +29,32 @@ const RegisterForm = () => {
   // 폼 등록 이벤트 핸들러
   const onSubmit = (e) => {
     e.preventDefault();
-    // 구현 예정
+    const { username, password, passwordConfirm } = form;
+    if (password !== passwordConfirm) {
+      // prettier-ignore
+      console.log('패스워드 불일치 입력값 :', passwordConfirm,'정상값 :',password,);
+      return;
+    }
+    dispatch(register({ username, password }));
   };
 
   // 컴포넌트가 처음 랜더링 될 때 form 초기화
   useEffect(() => {
     dispatch(initializeForm('register'));
   }, [dispatch]);
+
+  //회원 가입 실패 처리
+  useEffect(() => {
+    if (authError) {
+      console.log('회원 가입 오류 발생');
+      console.log(authError);
+      return;
+    }
+    if (auth) {
+      console.log('회원 가입 성공 ');
+      console.log(auth);
+    }
+  }, [auth, authError]);
 
   return (
     <AuthForm
