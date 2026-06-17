@@ -5,7 +5,7 @@ const LoginPage = () => {
   console.log('로그인');
   return (
     <AuthTemplate>
-      <AuthForm />
+      <AuthForm type="login" />
     </AuthTemplate>
   );
 };

@@ -5,7 +5,7 @@ const RegisterPage = () => {
   console.log('회원가입');
   return (
     <AuthTemplate>
-      <AuthForm />
+      <AuthForm type="register" />
     </AuthTemplate>
   );
 };
