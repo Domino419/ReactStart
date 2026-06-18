@@ -78,20 +78,20 @@ TagList.displayName = 'TagList'; /* 린트 에러 예방을 위해 추가 */
 
 const TagBox = () => {
   const [input, setInput] = useState('');
-  const [localTags, setLocaltags] = useState([]);
+  const [localTags, setLocalTags] = useState([]);
 
   const insertTag = useCallback(
     (tag) => {
       if (!tag) return; // 공백이라면 추가 안함.
       if (localTags.includes(tag)) return; // 이미 존재한다면 추가 안함.
-      setLocaltags([...localTags, tag]);
+      setLocalTags([...localTags, tag]);
     },
     [localTags],
   );
 
   const onRemove = useCallback(
     (tag) => {
-      setLocaltags(localTags.filter((t) => t !== tag));
+      setLocalTags(localTags.filter((t) => t !== tag));
     },
     [localTags],
   );
