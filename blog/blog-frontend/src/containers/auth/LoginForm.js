@@ -5,7 +5,7 @@ import AuthForm from '../../components/auth/AuthForm';
 import { useNavigate } from 'react-router-dom';
 import { check } from '../../modules/user';
 
-const LoginForm = ({ history }) => {
+const LoginForm = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
