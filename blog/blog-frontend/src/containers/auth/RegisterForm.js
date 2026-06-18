@@ -88,6 +88,11 @@ const RegisterForm = () => {
       // eslint ignore
       console.log('check API 성공 ', user);
       navigate('/'); // 홈 화면으로 이동
+      try {
+        localStorage.setItem('user', JSON.stringify(user));
+      } catch (error) {
+        console.log('LocalStorage is not working --- ');
+      }
     }
   }, [navigate, user]);
 
