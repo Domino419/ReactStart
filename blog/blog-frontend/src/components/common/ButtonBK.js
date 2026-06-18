@@ -1,9 +1,10 @@
+// userNavigate 사용한 button.js 파일
+
 import styled, { css } from 'styled-components';
 import palette from '../../lib/palette';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-//@ts-check
-const buttonStyle = css`
+const StyledButton = styled.button`
   border: none;
   border-radius: 4px;
   font-size: 1rem;
@@ -12,6 +13,7 @@ const buttonStyle = css`
   color: white;
   outline: none;
   cursor: pointer;
+
   background: ${palette.gray[8]};
   &:hover {
     background: ${palette.gray[6]};
@@ -35,19 +37,25 @@ const buttonStyle = css`
       }
     `}
 `;
-const StyledButton = styled.button`
-  ${buttonStyle}
-`;
 
-const StyledLink = styled(Link)`
-  ${buttonStyle}
-`;
+const Button = ({ to, cyan, fullWidth, ...rest }) => {
+  const navigate = useNavigate();
+  const onClick = (e) => {
+    if (to) {
+      navigate(to);
+    }
+    if (rest.onClick) {
+      rest.onClick(e);
+    }
+  };
 
-const Button = ({ cyan, fullWidth, ...props }) => {
-  return props.to ? (
-    <StyledLink $cyan={cyan} $fullWidth={fullWidth} {...props} />
-  ) : (
-    <StyledButton $cyan={cyan} $fullWidth={fullWidth} {...props} />
+  return (
+    <StyledButton
+      $cyan={cyan}
+      $fullWidth={fullWidth}
+      {...rest}
+      onClick={onClick}
+    />
   );
 };
 
