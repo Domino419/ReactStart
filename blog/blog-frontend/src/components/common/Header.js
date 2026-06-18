@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Responsive from './Responsive';
 import Button from './Button';
+import { Link } from 'react-router-dom';
 
 const HeaderBlock = styled.div`
   position: fixed;
@@ -9,7 +10,6 @@ const HeaderBlock = styled.div`
   box-shadow: 0px 2px 4px rgba(0, 0, 0.08);
 `;
 
-/* Resonsive 컴포넌트 속성에 스타일을 추가해서 새로운 컴포넌트 생성 */
 const Wrapper = styled(Responsive)`
   height: 4rem;
   display: flex;
@@ -26,7 +26,6 @@ const Wrapper = styled(Responsive)`
   }
 `;
 
-/* 헤더가 flxed로 되어 있기 떄문에 페이지 컨텐츠가 4rem 아래에 나타나도록 해주는 컴포넌트 */
 const Spacer = styled.div`
   height: 4rem;
 `;
@@ -36,9 +35,11 @@ const Header = () => {
     <>
       <HeaderBlock>
         <Wrapper>
-          <div className="logo"> REACTERS </div>
+          <Link to="/" className="logo">
+            리액트
+          </Link>
           <div className="right">
-            <Button>로그인 </Button>
+            <Button to="/login">로그인 </Button>
           </div>
         </Wrapper>
       </HeaderBlock>

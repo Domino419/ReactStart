@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import palette from '../../lib/palette';
+import { useNavigate } from 'react-router-dom';
 
 const StyledButton = styled.button`
   border: none;
@@ -34,9 +35,26 @@ const StyledButton = styled.button`
       }
     `}
 `;
-/* 교재랑 다름,  F12 개발자 콘솔에 에러 뜨길래 코드 바꿈. */
-const Button = ({ cyan, fullWidth, ...rest }) => {
-  return <StyledButton $cyan={cyan} $fullWidth={fullWidth} {...rest} />;
+
+const Button = ({ to, cyan, fullWidth, ...rest }) => {
+  const navigate = useNavigate();
+  const onClick = (e) => {
+    if (to) {
+      navigate(to);
+    }
+    if (rest.onClick) {
+      rest.onClick(e);
+    }
+  };
+
+  return (
+    <StyledButton
+      $cyan={cyan}
+      $fullWidth={fullWidth}
+      {...rest}
+      onClick={onClick}
+    />
+  );
 };
 
 export default Button;
