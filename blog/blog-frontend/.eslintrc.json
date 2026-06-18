@@ -33,6 +33,7 @@
     "no-console": "off",
     "no-undef": "error",
     "react/jsx-pascal-case": "error",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+     "react/prop-types": "off"
   }
 }
