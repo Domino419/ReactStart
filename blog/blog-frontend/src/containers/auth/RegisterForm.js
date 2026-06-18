@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { changeField, initializeForm, register } from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm';
@@ -6,6 +6,8 @@ import { check } from '../../modules/user';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
+  const [error, setError] = useState(null);
+
   const dispatch = useDispatch();
   const { form, auth, authError, user } = useSelector(
     ({ auth, user }) => ({
@@ -16,6 +18,8 @@ const RegisterForm = () => {
     }),
     shallowEqual,
   );
+
+  const navigate = useNavigate();
 
   // 인풋 변경 핸들러
   const onChange = (e) => {
@@ -33,9 +37,20 @@ const RegisterForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { username, password, passwordConfirm } = form;
+
+    if ([username, password, passwordConfirm].includes('')) {
+      setError('빈 칸을 모두 입력하세요.');
+      return;
+    }
+
     if (password !== passwordConfirm) {
       // prettier-ignore
       console.log('패스워드 불일치 입력값 :', passwordConfirm,'정상값 :',password,);
+      dispatch(changeField({ form: 'register', key: 'password', value: '' }));
+      dispatch(
+        changeField({ form: 'register', key: 'passwordConfirm', value: '' }),
+      );
+      setError('비밀번호가 일치하지 않습니다.');
       return;
     }
     dispatch(register({ username, password }));
@@ -50,7 +65,14 @@ const RegisterForm = () => {
   useEffect(() => {
     if (authError) {
       console.log('회원 가입 오류 발생');
-      console.log(authError);
+
+      if (authError.response.status === 409) {
+        setError('이미 존재하는 계정입니다.');
+        console.log('중복 계정 ');
+        return;
+      }
+      // 기타 이유
+      setError('회원 가입 실패 ');
       return;
     }
     if (auth) {
@@ -60,16 +82,14 @@ const RegisterForm = () => {
     }
   }, [auth, authError, dispatch]);
 
-  const Navigate = useNavigate();
-
   // user 값 설정 체크
   useEffect(() => {
     if (user) {
       // eslint ignore
       console.log('check API 성공 ', user);
-      Navigate('/'); // 홈 화면으로 이동
+      navigate('/'); // 홈 화면으로 이동
     }
-  }, [Navigate, user]);
+  }, [navigate, user]);
 
   return (
     <AuthForm
@@ -77,6 +97,7 @@ const RegisterForm = () => {
       form={form}
       onChange={onChange}
       onSubmit={onSubmit}
+      error={error}
     />
   );
 };
