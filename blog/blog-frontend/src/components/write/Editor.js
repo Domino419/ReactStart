@@ -28,6 +28,7 @@ const QuillWrapper = styled.div`
     font-size: 1.125rem;
     line-height: 1.5;
   }
+
   .ql-editor.ql-blank::before {
     left: 0px;
   }
@@ -60,6 +61,14 @@ const Editor = ({ title, body, onChangeField }) => {
       }
     });
   }, [onChangeField]);
+
+  // add ( 882p)
+  const mounted = useRef(false);
+  useEffect(() => {
+    if (mounted.current) return;
+    mounted.current = true;
+    quillInstance.current.root.innerHTML = body;
+  }, [body]);
 
   const onChangeTitle = (e) => {
     onChangeField({ key: 'title', value: e.target.value });

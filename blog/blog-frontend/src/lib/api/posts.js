@@ -14,3 +14,13 @@ export const listPosts = ({ page, username, tag }) => {
     params: { page, username, tag },
   });
 };
+
+// update post  API
+export const updatePost = ({ id, title, body, tags }) => {
+  return client.get(`/api/posts/${id}`, {
+    title,
+    body,
+    tags,
+  });
+};
+
