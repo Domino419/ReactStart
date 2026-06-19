@@ -21,21 +21,22 @@ export function* postsSaga() {
 const initialState = {
   post: null,
   error: null,
+  lastPage: 1,
 };
 
-
 const Posts = handleActions(
-    {
-      [LIST_POST_SUCCESS]: (state, { payload: posts }) => ({
-        ...state,
-        posts,
-      }),
-      [LIST_POST_FAILURE]: (state, { payload: error }) => ({
-        ...state,
-        error,
-      }),
-    },
-    initialState,
+  {
+    [LIST_POST_SUCCESS]: (state, { payload: posts ,  meta : response } ) => ({
+      ...state,
+      posts,
+      lastPage: parseInt(response.headers['last-page'], 10),
+    }),
+    [LIST_POST_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      error,
+    }),
+  },
+  initialState,
 );
 
 export default Posts;
