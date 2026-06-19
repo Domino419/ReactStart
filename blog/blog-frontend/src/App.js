@@ -14,8 +14,8 @@ const App = () => {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/write" element={<WritePage />} />
 
-      <Route path="/user/:username" element={<PostListPage />} />
-      <Route path="/user/:username/:postId" element={<PostPage />} />
+      <Route path="/:username" element={<PostListPage />} />
+      <Route path="/:username/:postId" element={<PostPage />} />
     </Routes>
   );
 };
