@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import Responsive from '../common/Responsive';
 import Button from '../common/Button';
 import palette from '../../lib/palette';
+import SubInfo from "../common/SubInfo";
+import Tags from "../common/Tags";
 
 const PostListBlock = styled(Responsive)`
   margin-top: 3rem;
@@ -30,7 +32,7 @@ const PostItemBlock = styled.div`
     font-size: 2rem;
     margin-bottom: 0;
     margin-top: 0;
-    %: hover {
+    &:hover {
       color: ${palette.gray[6]};
     }
   }
@@ -40,68 +42,59 @@ const PostItemBlock = styled.div`
   }
 `;
 
-const SubInfo = styled.div`
-  color: ${palette.gray[6]};
+// const SubInfo = styled.div`
+//     color: ${palette.gray[6]};
+//     /* span 사이에 가운뎃점 문자 보여주기 */
+//
+//     span + span:before {
+//         color: ${palette.gray[4]};
+//         padding-left: 0.25rem;
+//         padding-right: 0.25rem;
+//         content: '\B7';
+//     }
+// `;
 
-  /* span 사이에 가운뎃점 문자 보여주기 */
-
-  span + span :before {
-    color: ${palette.gray[4]};
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
-    content: '\\B7';
-  }
-`;
-
-const Tags = styled.div`
-  margin-top: 0.5rem;
-
-  .tag {
-    display: inline-block;
-    color: ${palette.cyan[7]};
-    text-decoration: none;
-    margin-right: 0.5rem;
-
-    &:hover {
-      color: ${palette.cyan[6]};
-    }
-  }
-`;
+// const Tags = styled.div`
+//   margin-top: 0.5rem;
+//
+//   .tag {
+//     display: inline-block;
+//     color: ${palette.cyan[7]};
+//     text-decoration: none;
+//     margin-right: 0.5rem;
+//
+//     &:hover {
+//       color: ${palette.cyan[6]};
+//     }
+//   }
+// `;
 
 const PostItem = () => {
   return (
     <PostItemBlock>
       <h2> 제목 </h2>
-      <SubInfo>
-        <span>
-          <b> username </b>
-        </span>
-        <span>{new Date().toLocaleDateString()}</span>
-      </SubInfo>
-      <Tags>
-        <div className="tag"> #태그1</div>
-        <div className="tag"> #태그2</div>
-      </Tags>
-        <p> 포트스 내용의 일부분.....</p>
+      <SubInfo username="username" publishedDate={new Date()} />
+      <Tags tags={['태그1', '태그2', '태그3']}></Tags>
+      <p> 포스트 내용의 일부분.....</p>
     </PostItemBlock>
   );
 };
 
 const PostList = () => {
   return (
-      <PostListBlock>
-          <WritePostButtonWrapper>
-              <Button cyan to = 'write'>
-                  새 글 작성하기
-              </Button>
-          </WritePostButtonWrapper>
-          <div>
-              <PostItem></PostItem>
-              <PostItem></PostItem>
-              <PostItem></PostItem>
-          </div>
-      </PostListBlock>
-  )
+    <PostListBlock>
+      <WritePostButtonWrapper>
+        <Button cyan to="write">
+          새 글 작성하기
+        </Button>
+      </WritePostButtonWrapper>
+      <div>
+        <PostItem></PostItem>
+        <PostItem></PostItem>
+        <PostItem></PostItem>
+      </div>
+    </PostListBlock>
+  );
 };
 
 export default PostList;
