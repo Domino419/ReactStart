@@ -59,7 +59,7 @@ const auth = handleActions(
   {
     [CHANGE_FIELD]: (state, { payload: { form, key, value } }) =>
       produce(state, (draft) => {
-        draft[form][key] = value; // ex : state.register.username을 바꾼다
+        draft[form][key] = value; // ex : state.register.username 바꾼다
       }),
     [INITIALIZE_FORM]: (state, { payload: form }) => ({
       ...state,

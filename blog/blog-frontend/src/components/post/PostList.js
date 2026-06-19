@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import Responsive from '../common/Responsive';
 import Button from '../common/Button';
 import palette from '../../lib/palette';
-import SubInfo from "../common/SubInfo";
-import Tags from "../common/Tags";
+import SubInfo from '../common/SubInfo';
+import Tags from '../common/Tags';
 
 const PostListBlock = styled(Responsive)`
   margin-top: 3rem;
@@ -32,6 +33,7 @@ const PostItemBlock = styled.div`
     font-size: 2rem;
     margin-bottom: 0;
     margin-top: 0;
+
     &:hover {
       color: ${palette.gray[6]};
     }
@@ -69,30 +71,45 @@ const PostItemBlock = styled.div`
 //   }
 // `;
 
-const PostItem = () => {
+const PostItem = ({ post }) => {
+  const { publishedDate, user, tags, title, body, _id } = post;
   return (
     <PostItemBlock>
-      <h2> 제목 </h2>
-      <SubInfo username="username" publishedDate={new Date()} />
-      <Tags tags={['태그1', '태그2', '태그3']}></Tags>
-      <p> 포스트 내용의 일부분.....</p>
+      <h2>
+        <Link to={`/@${user.username}/${_id}`}> {title}</Link>
+      </h2>
+      <SubInfo
+        username={user.username}
+        publishedDate={new Date(publishedDate)}
+      />
+      <Tags tags={tags}></Tags>
+      <p> {body}.</p>
     </PostItemBlock>
   );
 };
 
-const PostList = () => {
+const PostList = ({ posts, loading, error, showWriteButon }) => {
+  // 에러 발생시
+  if (error) {
+    return <PostListBlock> 존재하지 않는 포스트입니다. </PostListBlock>;
+  }
+
   return (
     <PostListBlock>
       <WritePostButtonWrapper>
-        <Button cyan to="write">
-          새 글 작성하기
-        </Button>
+        {showWriteButon && (
+          <Button cyan to="write">
+            새 글 작성하기
+          </Button>
+        )}
       </WritePostButtonWrapper>
-      <div>
-        <PostItem></PostItem>
-        <PostItem></PostItem>
-        <PostItem></PostItem>
-      </div>
+      {!loading && posts && (
+        <div>
+          {posts.map((post) => (
+            <PostItem post={post} key={post._id}></PostItem>
+          ))}
+        </div>
+      )}
     </PostListBlock>
   );
 };

@@ -36,10 +36,10 @@ const initialState = {
 
 const write = handleActions(
   {
-    [INITIALIZE]: () => initialState, // initialState를 넣으면 초기 상태로 바뀜
+    [INITIALIZE]: () => initialState, // initialState 를 넣으면 초기 상태로 바뀜
     [CHANGE_FIELD]: (state, { payload: { key, value } }) => ({
       ...state,
-      [key]: value, // 특정 key값을 업데이트
+      [key]: value, // 특정 key  업데이트
     }),
     [WRITE_POST]: (state) => ({
       ...state,
