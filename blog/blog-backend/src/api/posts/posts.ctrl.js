@@ -1,24 +1,36 @@
 import Post from '../../models/post.js';
 import mongoose from 'mongoose';
 import Joi from 'joi';
+import sanitizeHtml from 'sanitize-html' ;
 
 const { ObjectId } = mongoose.Types;
 
-//  ObjectId 유효성 검사
-/*
-export const checkObjectId = (ctx, next) => {
-  const { id } = ctx.params;
-  console.log('checkObjectId:::::::::::::::::::::');
-
-  if (!ObjectId.isValid(id)) {
-    ctx.status = 400;
-    console.log('유효하지 않은 ObjectId 입니다.');
-    return;
-  }
-  console.log('유효한 ObjectId 를 확인 했습니다.');
-  return next();
+// 악성 스크립트 주입 방지
+const sanitizeOption = {
+  allowedTags: [
+      'h1',
+      'h2',
+      'b',
+      'i',
+      'u',
+      's',
+      'p',
+      'ul',
+      'ol',
+      'li',
+      'blockquote',
+      'a',
+      'img',
+  ] ,
+  allowedAttributes: {
+    a : ['href', 'name', 'target'],
+    img : ['src'],
+    li : ['class'] ,
+  },
+  allowedSchemes: ['data', 'http' ] ,
 };
-*/
+
+
 
 //  ObjectId 유효성 검사
 export const getPostById = async (ctx, next) => {
@@ -66,7 +78,7 @@ export const write = async (ctx) => {
   const { title, body, tags } = ctx.request.body;
   const post = new Post({
     title,
-    body,
+    body : sanitizeHtml(body, sanitizeOption) ,
     tags,
     user: ctx.state.user,
   });
@@ -79,6 +91,14 @@ export const write = async (ctx) => {
     ctx.throw(500, e);
   }
 };
+
+// html 을 없애고 내용이 너무 길면 200자로 제한하는 함수
+const removeHtmlAndShorten = body => {
+  const filtered = sanitizeHtml(body, {
+    allowedTags: [],
+  }) ;
+  return filtered.length < 200 ? filtered : `${filtered.slice(0,200)}...` ;
+} ;
 
 // 게시글 목록 조회 (페이징 포함)
 export const list = async (ctx) => {
@@ -112,8 +132,7 @@ export const list = async (ctx) => {
       .map((post) => post.toJSON())
       .map((post) => ({
         ...post,
-        body:
-          post.body.length < 10 ? post.body : `${post.body.slice(0, 10)}...`,
+        body: removeHtmlAndShorten(post.body) ,
       }));
   } catch (e) {
     console.log('list _ error 발생 !!');
@@ -180,14 +199,19 @@ export const update = async (ctx) => {
     return;
   }
 
+  const nextData = { ...ctx.request.body }; // 객체 복사
+  // body 값이 있으면 필터링
+  if(nextData.body) {
+    nextData.body = sanitizeHtml(nextData.body , sanitizeOption) ;
+  }
   try {
-    const post = await Post.findByIdAndUpdate(id, ctx.request.body, {
+    const post = await Post.findByIdAndUpdate(id, nextData, {
       new: true,
     }).exec();
 
     if (!post) {
       ctx.status = 404;
-      console.log('Post가 일치하지 않습니다.');
+      console.log('Post 가 일치하지 않습니다.');
       return;
     }
 
