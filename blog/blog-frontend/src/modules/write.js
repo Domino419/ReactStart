@@ -41,7 +41,7 @@ const updatePostSaga = createRequestSaga(WRITE_POST, postAPI.updatePost);
 
 export function* writeSaga() {
   yield takeLatest(WRITE_POST, writePostSaga);
-  yield takeLatest(WRITE_POST, updatePostSaga);
+  yield takeLatest(UPDATE_POST, updatePostSaga);
 }
 
 const initialState = {

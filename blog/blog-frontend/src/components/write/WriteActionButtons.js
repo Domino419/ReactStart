@@ -14,7 +14,7 @@ const WriteActionButtonBlock = styled.div`
 const StyledButton = styled(Button)`
   height: 2.125rem;
   & + & {
-    margin-left: 0%.5rem;
+    margin-left: 0.5rem;
   }
 `;
 

@@ -2,24 +2,30 @@ import React, { useEffect } from 'react';
 import WriteActionButtons from '../../components/write/WriteActionButtons';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { writePost } from '../../modules/write';
+import { writePost, updatePost } from '../../modules/write';
 
 const WriteActionButtonsContainer = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { title, body, tags, post, postError } = useSelector(
+  const { title, body, tags, post, postError, originalPostId } = useSelector(
     ({ write }) => ({
       title: write.title,
       body: write.body,
       tags: write.tags,
       post: write.post,
       postError: write.postError,
+      originalPostId: write.originalPostId,
     }),
     shallowEqual,
   );
 
   // 포스트 등록
   const onPublish = () => {
+      if(originalPostId) {
+          dispatch( updatePost( { title, body, tags, id : originalPostId}));
+          console.log('여기 찍히니?')
+          return ;
+      }
     dispatch(
       writePost({
         title,
@@ -52,6 +58,7 @@ const WriteActionButtonsContainer = () => {
     <WriteActionButtons
       onPublish={onPublish}
       onCancel={onCancel}
+      isEdit = {!!originalPostId}
     ></WriteActionButtons>
   );
 };

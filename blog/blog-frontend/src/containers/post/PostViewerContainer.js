@@ -4,7 +4,7 @@ import { readPost, unloadPost } from '../../modules/post';
 import PostViewer from '../../components/post/PostViewer';
 import PostActionButtons from '../../components/post/PostActionButtons';
 import { setOriginalPost } from '../../modules/write';
-//import { removePost } from '../../lib/api/posts';
+import { removePost } from '../../lib/api/posts';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const PostViewerContainer = () => {
@@ -13,7 +13,7 @@ const PostViewerContainer = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { post, error, loading, user } = useSelector(
-    ({ post, loading , user}) => ({
+    ({ post, loading, user }) => ({
       post: post.post,
       error: post.error,
       loading: loading['post/READ_POST'],
@@ -34,7 +34,17 @@ const PostViewerContainer = () => {
     dispatch(setOriginalPost(post));
     navigate('/write');
   };
-    console.log ( ' user 아이디 확인 ', user ) ;
+  console.log(' user 아이디 확인 ', user);
+
+  const onRemove = async () => {
+    try {
+      await removePost(postId);
+      navigate('/'); // 홈으로 이동
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const ownPost = (user && user._id) === (post && post.user._id);
 
   return (
@@ -43,7 +53,7 @@ const PostViewerContainer = () => {
         post={post}
         loading={loading}
         error={error}
-        actionButtons={ownPost && <PostActionButtons onEdit={onEdit} />}
+        actionButtons={ownPost && <PostActionButtons onEdit={onEdit}  onRemove={onRemove}/>}
       ></PostViewer>
     </div>
   );

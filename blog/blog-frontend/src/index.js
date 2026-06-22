@@ -11,6 +11,8 @@ import rootReducer, { rootSaga } from './modules';
 import createSagaMiddleware from 'redux-saga';
 import { tempSetUser, check } from './modules/user';
 
+import { HelmetProvider} from "react-helmet-async";
+
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
@@ -39,7 +41,9 @@ console.log('프론트엔트 - src/index.js :::::::::::::::::::::::::');
 root.render(
   <Provider store={store}>
     <BrowserRouter>
+      <HelmetProvider>
       <App />
+      </HelmetProvider>
     </BrowserRouter>
   </Provider>,
 );
